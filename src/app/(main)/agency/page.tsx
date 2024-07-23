@@ -9,12 +9,12 @@ import AgencyDetails from "@/components/forms/agency-details";
 const Page = async ({searchParams}: { searchParams: { plan: Plan; state: string, code: string } }) => {
 
     const agencyId = await verifyAndAcceptInvitation();
-    const user = getAuthUSerDetails();
+    const user = await getAuthUSerDetails();
 
     if (agencyId) {
-        if (user?.role === "SUBACCOUNT_GUEST" || user.role === "SUBACCOUNT_USER") {
+        if (user?.role === "SUBACCOUNT_GUEST" || user?.role === "SUBACCOUNT_USER") {
             return redirect("/subaccount");
-        } else if (user?.role === "AGENCY_OWNER" || user.role === "AGENCY_ADMIN") {
+        } else if (user?.role === "AGENCY_OWNER" || user?.role === "AGENCY_ADMIN") {
             if (searchParams.plan) {
                 return redirect(`/agency/${agencyId}/billing?plan=${searchParams.plan}`);
             }

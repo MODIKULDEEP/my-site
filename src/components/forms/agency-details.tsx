@@ -105,7 +105,7 @@ const AgencyDetails = ({data}: Props) => {
             if (!data?.customerId) {
                 await upsertAgency({
                     id: data?.id ? data.id : v4(),
-                    // customerId: data?.customerId,
+                    customerId: data?.customerId,
                     address: values.address,
                     agencyLogo: values.agencyLogo,
                     city: values.city,
@@ -198,7 +198,7 @@ const AgencyDetails = ({data}: Props) => {
                                 <FormField disabled={isLoading} control={form.control} name="companyEmail"
                                            render={({field}) => (
                                                <FormItem className="flex-1">
-                                                   <FormLabel>Agency Name</FormLabel>
+                                                   <FormLabel>Agency Email</FormLabel>
                                                    <FormControl>
                                                        <Input placeholder='Your Agency Email' {...field}/>
                                                    </FormControl>
