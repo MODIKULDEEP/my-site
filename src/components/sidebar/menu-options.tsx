@@ -75,7 +75,7 @@ const MenuOption = ({defaultOpen, subAccounts, sidebarOpt, sidebarLogo, details,
                             {
                                 <Command className="rounded-lg">
                                     <CommandInput placeholder="Search Account..."/>
-                                    <CommandList className="pb-16">
+                                    <CommandList className="pb-16 no-scrollbar">
                                         <CommandEmpty>
                                             No Results Found
                                         </CommandEmpty>
