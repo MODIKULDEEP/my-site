@@ -1,5 +1,5 @@
 import React from "react"
-import {getAuthUSerDetails} from "@/lib/queries";
+import {getAuthUserDetails} from "@/lib/queries";
 import MenuOption from "@/components/sidebar/menu-options";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Sidebar = async ({id, type}: Props) => {
-    const user = await getAuthUSerDetails()
+    const user = await getAuthUserDetails()
     if (!user) return null;
     if (!user.Agency) return
 

@@ -1,4 +1,4 @@
-import {getAuthUSerDetails, verifyAndAcceptInvitation} from "@/lib/queries";
+import {getAuthUserDetails, verifyAndAcceptInvitation} from "@/lib/queries";
 import React from "react";
 import {redirect} from "next/navigation";
 import {Plan} from "@prisma/client";
@@ -9,7 +9,7 @@ import AgencyDetails from "@/components/forms/agency-details";
 const Page = async ({searchParams}: { searchParams: { plan: Plan; state: string, code: string } }) => {
 
     const agencyId = await verifyAndAcceptInvitation();
-    const user = await getAuthUSerDetails();
+    const user = await getAuthUserDetails();
 
     if (agencyId) {
         if (user?.role === "SUBACCOUNT_GUEST" || user?.role === "SUBACCOUNT_USER") {
