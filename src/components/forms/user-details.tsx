@@ -289,7 +289,7 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
                                             )
                                         return (
                                             <div key={subAcc.id}
-                                                 className="flex flex-col items-center justify-between rounded-lg border p-4">
+                                                 className="flex items-center justify-between rounded-lg border p-4">
                                                 <div>
                                                     <p>{subAcc.name}</p>
                                                 </div>

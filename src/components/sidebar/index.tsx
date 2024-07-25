@@ -25,7 +25,7 @@ const Sidebar = async ({id, type}: Props) => {
     }
 
     const sidebarOpt = type === "agency" ? user.Agency.SidebarOption || [] : user?.Agency.SubAccount.find((subaccount) => subaccount.id === id)?.sidebarOption || []
-    const subaccounts = user.Agency.SubAccount.find((subaccount) => user.Permissions.find((permission) => permission.subAccountId === subaccount.id && permission.access))
+    const subaccounts = user.Agency.SubAccount.filter((subaccount) => user.Permissions.find((permission) => permission.subAccountId === subaccount.id && permission.access))
 
     return (
         <>
