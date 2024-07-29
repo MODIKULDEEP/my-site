@@ -49,41 +49,45 @@ const InfoBar = ({notifications, subAccountId, className, role}: Props) => {
                                 {(role === "AGENCY_OWNER" || role === "AGENCY_ADMIN") &&
                                     <Card className="flex items-center justify-center p-4">
                                         Current Subaccount
-                                        <Switch onChangeCapture={handleClick}/>
+                                        <Switch onCheckedChange={handleClick}/>
                                     </Card>
                                 }
                             </SheetDescription>
                         </SheetHeader>
-                        {allNotifications.map((notification) => (
-                            <div key={notification.id}
-                                 className="flex flex-col gap-y-2 mb-2 overflow-x-scroll text-ellipsis">
-                                <div className="flex gap-2">
-                                    <Avatar>
-                                        <AvatarImage src={notification.User.avatarUrl} alt="Profile Picture"/>
-                                        <AvatarFallback className="bg-primary">
-                                            {notification.User.name.slice(0, 2).toUpperCase()}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <div className="flex flex-col">
-                                        <p>
-                                            <span className="font-bold">{notification.notification.split("|")[0]}</span>
-                                            <span
-                                                className="text-muted-foreground">{notification.notification.split("|")[1]}</span>
-                                            <span className="font-bold">{notification.notification.split("|")[2]}</span>
-                                        </p>
-                                        <small
-                                            className="text-xs text-muted-foreground">{new Date(notification.createdAt).toLocaleDateString()}</small>
+                        <div className="overflow-y-scroll no-scrollbar">
+                            {allNotifications.map((notification) => (
+                                <div key={notification.id}
+                                     className="flex flex-col gap-y-2 mb-2 overflow-x-scroll text-ellipsis no-scrollbar">
+                                    <div className="flex gap-2">
+                                        <Avatar>
+                                            <AvatarImage src={notification.User.avatarUrl} alt="Profile Picture"/>
+                                            <AvatarFallback className="bg-primary">
+                                                {notification.User.name.slice(0, 2).toUpperCase()}
+                                            </AvatarFallback>
+                                        </Avatar>
+                                        <div className="flex flex-col">
+                                            <p>
+                                                <span
+                                                    className="font-bold">{notification.notification.split("|")[0]}</span>
+                                                <span
+                                                    className="text-muted-foreground">{notification.notification.split("|")[1]}</span>
+                                                <span
+                                                    className="font-bold">{notification.notification.split("|")[2]}</span>
+                                            </p>
+                                            <small
+                                                className="text-xs text-muted-foreground">{new Date(notification.createdAt).toLocaleDateString()}</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                        {allNotifications?.length === 0 &&
-                            (
-                                <div className="flex items-center justify-center mb-4 text-muted-foreground">
-                                    You have no notifications
-                                </div>
-                            )
-                        }
+                            ))}
+                            {allNotifications?.length === 0 &&
+                                (
+                                    <div className="flex items-center justify-center mb-4 text-muted-foreground">
+                                        You have no notifications
+                                    </div>
+                                )
+                            }
+                        </div>
                     </SheetContent>
                 </Sheet>
                 <ModeToggle/>

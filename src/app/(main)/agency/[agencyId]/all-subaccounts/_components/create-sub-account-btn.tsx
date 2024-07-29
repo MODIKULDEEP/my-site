@@ -5,7 +5,7 @@ import {useModal} from "@/providers/modal-provider";
 import {Button} from "@/components/ui/button";
 import {twMerge} from "tailwind-merge";
 import CustomModal from "@/components/global/custom-modal";
-import SubAccountDetails from "@/components/forms/suaccount-details";
+import SubAccountDetails from "@/components/forms/subaccount-details";
 import {PlusCircleIcon} from "lucide-react";
 
 type Props = {

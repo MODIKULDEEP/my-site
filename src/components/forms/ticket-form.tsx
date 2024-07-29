@@ -1,52 +1,25 @@
 'use client'
-import {
-    getSubAccountTeamMembers,
-    saveActivityLogNotification,
-    searchContacts,
-    upsertTicket,
-} from '@/lib/queries'
-import { TicketFormSchema, TicketWithTags } from '@/lib/types'
-import { useModal } from '@/providers/modal-provider'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Contact, Tag, User } from '@prisma/client'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { toast } from '../ui/use-toast'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { CheckIcon, ChevronsUpDownIcon, User2 } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-} from '../ui/command'
-import { cn } from '@/lib/utils'
+import {getSubAccountTeamMembers, saveActivityLogNotification, searchContacts, upsertTicket,} from '@/lib/queries'
+import {TicketFormSchema, TicketWithTags} from '@/lib/types'
+import {useModal} from '@/providers/modal-provider'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Contact, Tag, User} from '@prisma/client'
+import {useRouter} from 'next/navigation'
+import React, {useEffect, useRef, useState} from 'react'
+import {useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {toast} from '../ui/use-toast'
+import {Card, CardContent, CardHeader, CardTitle} from '../ui/card'
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from '@/components/ui/form'
+import {Input} from '../ui/input'
+import {Textarea} from '../ui/textarea'
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
+import {Avatar, AvatarFallback, AvatarImage} from '../ui/avatar'
+import {CheckIcon, ChevronsUpDownIcon, User2} from 'lucide-react'
+import {Popover, PopoverContent, PopoverTrigger} from '../ui/popover'
+import {Button} from '../ui/button'
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from '../ui/command'
+import {cn} from '@/lib/utils'
 import Loading from '../global/loading'
 import TagCreator from '../global/tag-creator'
 
@@ -56,8 +29,8 @@ type Props = {
     getNewTicket: (ticket: TicketWithTags[0]) => void
 }
 
-const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
-    const { data: defaultData, setClose } = useModal()
+const TicketForm = ({getNewTicket, laneId, subaccountId}: Props) => {
+    const {data: defaultData, setClose} = useModal()
     const router = useRouter()
     const [tags, setTags] = useState<Tag[]>([])
     const [contact, setContact] = useState('')
@@ -119,7 +92,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                     laneId,
                     id: defaultData.ticket?.id,
                     assignedUserId: assignedTo,
-                    ...(contact ? { customerId: contact } : {}),
+                    ...(contact ? {customerId: contact} : {}),
                 },
                 tags
             )
@@ -161,7 +134,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                             disabled={isLoading}
                             control={form.control}
                             name="name"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Ticket Name</FormLabel>
                                     <FormControl>
@@ -170,7 +143,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
@@ -178,7 +151,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                             disabled={isLoading}
                             control={form.control}
                             name="description"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Description</FormLabel>
                                     <FormControl>
@@ -187,7 +160,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
@@ -195,7 +168,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                             disabled={isLoading}
                             control={form.control}
                             name="value"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Ticket Value</FormLabel>
                                     <FormControl>
@@ -204,7 +177,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
@@ -224,9 +197,9 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                     placeholder={
                                         <div className="flex items-center gap-2">
                                             <Avatar className="w-8 h-8">
-                                                <AvatarImage alt="contact" />
+                                                <AvatarImage alt="contact"/>
                                                 <AvatarFallback className="bg-primary text-sm text-white">
-                                                    <User2 size={14} />
+                                                    <User2 size={14}/>
                                                 </AvatarFallback>
                                             </Avatar>
 
@@ -250,7 +223,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                                     src={teamMember.avatarUrl}
                                                 />
                                                 <AvatarFallback className="bg-primary text-sm text-white">
-                                                    <User2 size={14} />
+                                                    <User2 size={14}/>
                                                 </AvatarFallback>
                                             </Avatar>
 
@@ -276,7 +249,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                     {contact
                                         ? contactList.find((c) => c.id === contact)?.name
                                         : 'Select Customer...'}
-                                    <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                    <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                                 </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-[400px] p-0">
@@ -300,28 +273,30 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                                             }, 1000)
                                         }}
                                     />
-                                    <CommandEmpty>No Customer found.</CommandEmpty>
-                                    <CommandGroup>
-                                        {contactList.map((c) => (
-                                            <CommandItem
-                                                key={c.id}
-                                                value={c.id}
-                                                onSelect={(currentValue) => {
-                                                    setContact(
-                                                        currentValue === contact ? '' : currentValue
-                                                    )
-                                                }}
-                                            >
-                                                {c.name}
-                                                <CheckIcon
-                                                    className={cn(
-                                                        'ml-auto h-4 w-4',
-                                                        contact === c.id ? 'opacity-100' : 'opacity-0'
-                                                    )}
-                                                />
-                                            </CommandItem>
-                                        ))}
-                                    </CommandGroup>
+                                    <CommandList>
+                                        <CommandEmpty>No Customer found.</CommandEmpty>
+                                        <CommandGroup>
+                                            {contactList.map((c) => (
+                                                <CommandItem
+                                                    key={c.id}
+                                                    value={c.id}
+                                                    onSelect={(currentValue) => {
+                                                        setContact(
+                                                            currentValue === contact ? '' : currentValue
+                                                        )
+                                                    }}
+                                                >
+                                                    {c.name}
+                                                    <CheckIcon
+                                                        className={cn(
+                                                            'ml-auto h-4 w-4',
+                                                            contact === c.id ? 'opacity-100' : 'opacity-0'
+                                                        )}
+                                                    />
+                                                </CommandItem>
+                                            ))}
+                                        </CommandGroup>
+                                    </CommandList>
                                 </Command>
                             </PopoverContent>
                         </Popover>
@@ -330,7 +305,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                             disabled={isLoading}
                             type="submit"
                         >
-                            {form.formState.isSubmitting ? <Loading /> : 'Save'}
+                            {form.formState.isSubmitting ? <Loading/> : 'Save'}
                         </Button>
                     </form>
                 </Form>

@@ -155,43 +155,45 @@ const PipelineTicket = ({
                                         <CardDescription className="w-full ">
                                             {ticket.description}
                                         </CardDescription>
-                                        <HoverCard>
-                                            <HoverCardTrigger asChild>
-                                                <div
-                                                    className="p-2 text-muted-foreground flex gap-2 hover:bg-muted transition-all rounded-lg cursor-pointer items-center">
-                                                    <LinkIcon/>
-                                                    <span className="text-xs font-bold">CONTACT</span>
-                                                </div>
-                                            </HoverCardTrigger>
-                                            <HoverCardContent
-                                                side="right"
-                                                className="w-fit"
-                                            >
-                                                <div className="flex justify-between space-x-4">
-                                                    <Avatar>
-                                                        <AvatarImage/>
-                                                        <AvatarFallback className="bg-primary">
-                                                            {ticket.Customer?.name.slice(0, 2).toUpperCase()}
-                                                        </AvatarFallback>
-                                                    </Avatar>
-                                                    <div className="space-y-1">
-                                                        <h4 className="text-sm font-semibold">
-                                                            {ticket.Customer?.name}
-                                                        </h4>
-                                                        <p className="text-sm text-muted-foreground">
-                                                            {ticket.Customer?.email}
-                                                        </p>
-                                                        <div className="flex items-center pt-2">
-                                                            <Contact2 className="mr-2 h-4 w-4 opacity-70"/>
-                                                            <span className="text-xs text-muted-foreground">
+                                        {ticket.Customer &&
+                                            <HoverCard>
+                                                <HoverCardTrigger asChild>
+                                                    <div
+                                                        className="p-2 text-muted-foreground flex gap-2 hover:bg-muted transition-all rounded-lg cursor-pointer items-center">
+                                                        <LinkIcon/>
+                                                        <span className="text-xs font-bold">CONTACT</span>
+                                                    </div>
+                                                </HoverCardTrigger>
+                                                <HoverCardContent
+                                                    side="right"
+                                                    className="w-fit"
+                                                >
+                                                    <div className="flex justify-between space-x-4">
+                                                        <Avatar>
+                                                            <AvatarImage/>
+                                                            <AvatarFallback className="bg-primary">
+                                                                {ticket.Customer?.name.slice(0, 2).toUpperCase()}
+                                                            </AvatarFallback>
+                                                        </Avatar>
+                                                        <div className="space-y-1">
+                                                            <h4 className="text-sm font-semibold">
+                                                                {ticket.Customer?.name}
+                                                            </h4>
+                                                            <p className="text-sm text-muted-foreground">
+                                                                {ticket.Customer?.email}
+                                                            </p>
+                                                            <div className="flex items-center pt-2">
+                                                                <Contact2 className="mr-2 h-4 w-4 opacity-70"/>
+                                                                <span className="text-xs text-muted-foreground">
                                 Joined{' '}
-                                                                {ticket.Customer?.createdAt.toLocaleDateString()}
+                                                                    {ticket.Customer?.createdAt.toLocaleDateString()}
                               </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </HoverCardContent>
-                                        </HoverCard>
+                                                </HoverCardContent>
+                                            </HoverCard>
+                                        }
                                     </CardHeader>
                                     <CardFooter
                                         className="m-0 p-2 border-t-[1px] border-muted-foreground/20 flex items-center justify-between">

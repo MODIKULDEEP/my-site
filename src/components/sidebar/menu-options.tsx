@@ -12,7 +12,7 @@ import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandL
 import Link from "next/link";
 import {useModal} from "@/providers/modal-provider";
 import CustomModal from "@/components/global/custom-modal";
-import SubAccountDetails from "@/components/forms/suaccount-details";
+import SubAccountDetails from "@/components/forms/subaccount-details";
 import {Separator} from "@/components/ui/separator";
 import {icons} from "@/lib/constants";
 

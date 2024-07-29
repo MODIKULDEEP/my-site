@@ -789,13 +789,24 @@ export const deleteTicket = async (ticketId: string) => {
 
 export const _getTicketsWithAllRelations = async (laneId: string) => {
     const response = await db.ticket.findMany({
-        where: { laneId: laneId },
+        where: {laneId: laneId},
         include: {
             Assigned: true,
             Customer: true,
             Lane: true,
             Tags: true,
         },
+    })
+    return response
+}
+
+export const upsertContact = async (
+    contact: Prisma.ContactUncheckedCreateInput
+) => {
+    const response = await db.contact.upsert({
+        where: {id: contact.id || v4()},
+        update: contact,
+        create: contact,
     })
     return response
 }

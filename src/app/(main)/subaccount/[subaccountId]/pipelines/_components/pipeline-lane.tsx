@@ -29,7 +29,6 @@ import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { Edit, MoreVertical, PlusCircleIcon, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { Dispatch, SetStateAction, useMemo } from 'react'
-// import PipelineTicket from './pipeline-ticket'
 import CustomModal from '@/components/global/custom-modal'
 import TicketForm from '@/components/forms/ticket-form'
 import PipelineTicket from './pipeline-ticket'
@@ -62,7 +61,6 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
     })
 
     const laneAmt = useMemo(() => {
-        console.log(tickets)
         return tickets.reduce(
             (sum, ticket) => sum + (Number(ticket?.value) || 0),
             0
@@ -147,7 +145,7 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                     >
                         <AlertDialog>
                             <DropdownMenu>
-                                <div className="bg-slate-200/30 dark:bg-background/20  h-[700px] w-[300px] px-4 relative rounded-lg overflow-visible flex-shrink-0 ">
+                                <div className="bg-slate-200/30 dark:bg-background/20  h-[700px] w-[300px] px-4 relative rounded-lg overflow-visible flex-shrink-0">
                                     <div
                                         {...provided.dragHandleProps}
                                         className=" h-14 backdrop-blur-lg dark:bg-background/40 bg-slate-200/60  absolute top-0 left-0 right-0 z-10 "
@@ -180,11 +178,11 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                                         type="ticket"
                                     >
                                         {(provided) => (
-                                            <div className=" max-h-[700px] overflow-scroll pt-12 ">
+                                            <div className="max-h-[700px] overflow-scroll pt-12 no-scrollbar h-full">
                                                 <div
                                                     {...provided.droppableProps}
                                                     ref={provided.innerRef}
-                                                    className="mt-2"
+                                                    className="mt-2 h-full"
                                                 >
                                                     {tickets.map((ticket, index) => (
                                                         <PipelineTicket
@@ -205,7 +203,7 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                                     <DropdownMenuContent>
                                         <DropdownMenuLabel>Options</DropdownMenuLabel>
                                         <DropdownMenuSeparator />
-                                        <AlertDialogTrigger>
+                                        <AlertDialogTrigger className="w-full">
                                             <DropdownMenuItem className="flex items-center gap-2">
                                                 <Trash size={15} />
                                                 Delete

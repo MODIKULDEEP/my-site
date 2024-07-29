@@ -78,13 +78,13 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
         }
     })
 
+    const getPermissions = async () => {
+        if (!data.user) return
+        const permission = await getUserPermissions(data.user.id)
+        setSubAccountPermissions(permission)
+    }
     useEffect(() => {
         if (!data.user) return
-        const getPermissions = async () => {
-            if (!data.user) return
-            const permission = await getUserPermissions(data.user.id)
-            setSubAccountPermissions(permission)
-        }
         getPermissions()
     }, [data, form]);
 
@@ -105,8 +105,8 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
         if (type === "agency") {
             await saveActivityLogNotification({
                 agencyId: authUserData?.Agency?.id,
-                description: `Gave ${userData?.name} access to | ${subAccountPermissions?.Permissions.find((p) => p.SubAccountId === subAccountId)?.SubAccount.name}`,
-                subAccountId: subAccountPermissions?.Permissions.find((p) => p.SubAccountId === subAccountId)?.SubAccount.id,
+                description: `Gave ${data?.user?.name} access to | ${subAccountPermissions?.Permissions.find((p) => p.subAccountId === subAccountId)?.SubAccount.name}`,
+                subAccountId: subAccountPermissions?.Permissions.find((p) => p.subAccountId === subAccountId)?.SubAccount.id,
             })
             if (response) {
                 toast({
@@ -115,10 +115,11 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
                 })
                 if (subAccountPermissions) {
                     subAccountPermissions.Permissions.find((p) => {
-                        if (p.SubAccountId === subAccountId) {
+                        if (p.subAccountId === subAccountId) {
                             return {...p, access: !p.access}
                         }
                     })
+                    getPermissions()
                 }
             } else {
                 toast({
@@ -143,7 +144,7 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
             ).forEach(async (subaccount) => {
                 await saveActivityLogNotification({
                     agencyId: undefined,
-                    description: `Updated ${userData?.name} information`,
+                    description: `Updated ${data?.user?.name} information`,
                     subAccountId: subaccount.id,
                 })
             })
@@ -222,7 +223,7 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
                                     <FormControl>
                                         <Input
                                             readOnly={
-                                                userData?.role === 'AGENCY_OWNER' ||
+                                                data?.user?.role === 'AGENCY_OWNER' ||
                                                 form.formState.isSubmitting
                                             }
                                             placeholder="Email"
@@ -285,7 +286,7 @@ const UserDetails = ({id, userData, subAccount, type}: Props) => {
                                     {subAccount?.map((subAcc) => {
                                         const subAccountPermissionsDetails =
                                             subAccountPermissions?.Permissions.find(
-                                                (p) => p.subAccountId === subAccount.id
+                                                (p) => p.subAccountId === subAcc.id
                                             )
                                         return (
                                             <div key={subAcc.id}
