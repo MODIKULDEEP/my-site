@@ -9,6 +9,7 @@ import {
 } from "@/lib/queries";
 import {db} from "@/lib/db";
 import * as z from "zod"
+import Stripe from "stripe";
 
 export type NotificationWithUser =
     | ({

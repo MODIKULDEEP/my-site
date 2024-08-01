@@ -23,6 +23,7 @@ const isPublicRoute = createRouteMatcher([
   "/agency/sign-up(.*)",
   "/site",
   "/api/uploadthing",
+  "/api/stripe/webhook"
 ]);
 
 const afterAuth = async (auth: ClerkMiddlewareAuth, req: any) => {
