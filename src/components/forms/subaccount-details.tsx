@@ -98,6 +98,7 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
             setClose()
             router.refresh()
         } catch (error) {
+            console.log(error)
             toast({
                 variant: 'destructive',
                 title: 'Oppse!',
